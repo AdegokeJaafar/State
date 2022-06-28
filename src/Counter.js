@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-undef */
 /* eslint-disable react/require-render-return */
 /* eslint-disable no-unused-vars */
@@ -39,16 +40,23 @@ const Counter = ({ max, step })=> {
 
 const increment = () => {
     setCount(c => {
-        if (c >= max) return;
+        if (c >= max) return c;
+        return c + step;
     });
 };
 const decrement = () =>setCount(count - 1);
 const reset = () =>  setCount(0);
 
-const storeStateInLocalStorage = () => {
-    localStorage.setItem('counterState', JSON.stringify(this.state));
-    console.log(localStorage);
-}
+useEffect (() => {
+    const id = setInterval(() =>  {
+        console.log(`Count: ${count}`);
+     } , 3000)
+}, [count]);   
+
+// const storeStateInLocalStorage = () => {
+//     localStorage.setItem('counterState', JSON.stringify(this.state));
+//     console.log(localStorage);
+// }
 
 
 class Count extends Component {
